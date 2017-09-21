@@ -11,7 +11,6 @@ import org.rayeye.common.log.LogFactory;
 import org.rayeye.vertx.address.EventBusAddress;
 import org.rayeye.vertx.result.ResultOb;
 import org.rayeye.vertx.standard.StandardVertxUtil;
-import org.rayeye.vertx.util.ParamUtil;
 
 /**
  * 事件发送调用处理器

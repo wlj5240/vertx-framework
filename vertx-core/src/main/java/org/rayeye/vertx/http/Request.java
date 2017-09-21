@@ -4,17 +4,22 @@ import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonObject;
 
 /**
- * <pre>
- * @File：Request
- * @Version：1.0.0
- * @Author：Neil.Zhou
- * @CreateDate：2016/9/30 11:52
- * @Modify：
- * @ModifyDate：2016/9/30
- * @Descript：描述
- * </pre>
+ * 用户请求对象封装
+ * @ProjectName:
+ * @Package:        org.rayeye.vertx.http
+ * @ClassName:      Request
+ * @Description:    用户请求对象封装
+ * @Author:         Neil.Zhou
+ * @CreateDate:     2017/9/21 13:23
+ * @UpdateUser:     Neil.Zhou
+ * @UpdateDate:     2017/9/21 13:23
+ * @UpdateRemark:   The modified content
+ * @Version:        1.0
+ * <p>Copyright: Copyright (c) 2017/9/21</p>
+ *
  */
 public class Request {
+
     String url;
     String uri;
     String path;

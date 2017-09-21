@@ -4,16 +4,16 @@ import java.lang.annotation.*;
 
 /**
  * Router API Mehtod 标识注解
- * @ProjectName:    [vertx-framework]
- * @Package:        [org.rayeye.vertx.annotations]
- * @ClassName:      [RouteMapping]
- * @Description:    [用来标识具体API使用]
- * @Author:         [Neil.Zhou]
- * @CreateDate:     [2017/9/20 13:34]
- * @UpdateUser:     [Neil.Zhou]
- * @UpdateDate:     [2017/9/20 13:34]
- * @UpdateRemark:   [need to permission to verify]
- * @Version:        [1.0]
+ * @ProjectName:    vertx-core
+ * @Package:        org.rayeye.vertx.annotations
+ * @ClassName:      RouteMapping
+ * @Description:    用来标识具体API使用
+ * @Author:         Neil.Zhou
+ * @CreateDate:     2017/9/20 13:34
+ * @UpdateUser:     Neil.Zhou
+ * @UpdateDate:     2017/9/20 13:34
+ * @UpdateRemark:   need to permission to verify
+ * @Version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */

@@ -5,16 +5,16 @@ import io.vertx.core.json.Json;
 
 /**
  *  response响应集合消息
- * @ProjectName:    [vertx-core]
- * @Package:        [org.rayeye.vertx.result]
- * @ClassName:      [ResultList]
- * @Description:    [响应集合消息]
- * @Author:         [Neil.Zhou]
- * @CreateDate:     [2017/9/20 13:34]
- * @UpdateUser:     [Neil.Zhou]
- * @UpdateDate:     [2017/9/20 13:34]
- * @UpdateRemark:   [相应消息]
- * @Version:        [1.0]
+ * @ProjectName:    vertx-core
+ * @Package:        org.rayeye.vertx.result
+ * @ClassName:      ResultList
+ * @Description:    响应集合消息
+ * @Author:         Neil.Zhou
+ * @CreateDate:     2017/9/20 13:34
+ * @UpdateUser:     Neil.Zhou
+ * @UpdateDate:     2017/9/20 13:34
+ * @UpdateRemark:   相应消息
+ * @Version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */

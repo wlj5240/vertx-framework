@@ -5,7 +5,7 @@ import io.vertx.ext.web.Router;
 /**
  * 获得全局的Router对象
  *
- * @ProjectName: vertx-framework
+ * @ProjectName: vertx-core
  * @Package: org.rayeye.vertx.standard
  * @ClassName: SingleVertxRouter
  * @Description: 获得全局的Router对象

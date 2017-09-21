@@ -13,16 +13,16 @@ import java.net.UnknownHostException;
 /**
  * 获得ip 客户端工具类
  *
- * @ProjectName: [vertx-core]
- * @Package: [org.rayeye.vertx.util]
- * @ClassName: [${TYPE_NAME}]
- * @Description: [获得ip 客户端工具类]
- * @Author: [Neil.Zhou]
- * @CreateDate: [2017/9/20 17:26]
- * @UpdateUser: [Neil.Zhou]
- * @UpdateDate: [2017/9/20 17:26]
- * @UpdateRemark: [The modified content]
- * @Version: [1.0]
+ * @ProjectName: vertx-core
+ * @Package: org.rayeye.vertx.util
+ * @ClassName: NetworkUtil
+ * @Description: 获得ip 客户端工具类
+ * @Author: Neil.Zhou
+ * @CreateDate: 2017/9/20 17:26
+ * @UpdateUser: Neil.Zhou
+ * @UpdateDate: 2017/9/20 17:26
+ * @UpdateRemark: The modified content
+ * @Version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class NetworkUtil {

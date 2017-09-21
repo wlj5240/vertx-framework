@@ -3,17 +3,17 @@ package org.rayeye.vertx.result;
 import io.vertx.core.json.Json;
 
 /**
- *  相应消息类型
- * @ProjectName:    [vertx-core]
- * @Package:        [org.rayeye.vertx.result]
- * @ClassName:      [ResultOb]
- * @Description:    [相应消息类型]
- * @Author:         [Neil.Zhou]
- * @CreateDate:     [2017/9/20 13:34]
- * @UpdateUser:     [Neil.Zhou]
- * @UpdateDate:     [2017/9/20 13:34]
- * @UpdateRemark:   [相应消息]
- * @Version:        [1.0]
+ *  响应消息类型
+ * @ProjectName:    vertx-core
+ * @Package:        org.rayeye.vertx.result
+ * @ClassName:      ResultOb
+ * @Description:    响应消息类型
+ * @Author:         Neil.Zhou
+ * @CreateDate:     2017/9/20 13:34
+ * @UpdateUser:     Neil.Zhou
+ * @UpdateDate:     2017/9/20 13:34
+ * @UpdateRemark:   相应消息
+ * @Version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */
