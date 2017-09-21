@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<Properties>
+		<Property name="LOG_DIR">/logs/osk</Property>
+	</Properties>
+	<appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<ThresholdFilter level="trace" onMatch="ACCEPT"
+							 onMismatch="DENY" />
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+		</Console>
+		<RollingFile name="ErrorRollingFile" fileName="${LOG_DIR}/error.log"
+					 filePattern="${LOG_DIR}/$${date:yyyy-MM}/error-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<Filters>
+				<ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+		<RollingFile name="WarnRollingFile" fileName="${LOG_DIR}/warn.log"
+					 filePattern="${LOG_DIR}/$${date:yyyy-MM}/warn-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="ACCEPT"
+								 onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+		<RollingFile name="InfoRollingFile" fileName="${LOG_DIR}/info.log"
+					 filePattern="${LOG_DIR}/$${date:yyyy-MM}/info-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<Filters>
+				<ThresholdFilter level="error" onMatch="DENY"
+								 onMismatch="NEUTRAL" />
+				<ThresholdFilter level="info" onMatch="ACCEPT"
+								 onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+		<RollingFile name="DebugRollingFile" fileName="${LOG_DIR}/debug.log"
+					 filePattern="${LOG_DIR}/$${date:yyyy-MM}/debug-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<Filters>
+				<ThresholdFilter level="info" onMatch="DENY"
+								 onMismatch="NEUTRAL" />
+				<ThresholdFilter level="debug" onMatch="ACCEPT"
+								 onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+		<RollingFile name="TraceRollingFile" fileName="${LOG_DIR}/trace.log"
+					 filePattern="${LOG_DIR}/$${date:yyyy-MM}/trace-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-4r | [%t] | %-5level | %c:%L | - %msg%xEx%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<Filters>
+				<ThresholdFilter level="debug" onMatch="DENY"
+								 onMismatch="NEUTRAL" />
+				<ThresholdFilter level="trace" onMatch="ACCEPT"
+								 onMismatch="DENY" />
+			</Filters>
+		</RollingFile>
+
+	</appenders>
+	<loggers>
+		<root level="Trace">
+			<appender-ref ref="Console" />
+			<appender-ref ref="ErrorRollingFile" />
+			<appender-ref ref="WarnRollingFile" />
+			<appender-ref ref="InfoRollingFile" />
+			<appender-ref ref="DebugRollingFile" />
+			<appender-ref ref="TraceRollingFile" />
+		</root>
+	</loggers>
+</configuration>  

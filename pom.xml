@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.rayeye.vertx</groupId>
+    <artifactId>vertx-framework</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+
+
+    <description>
+        1、项目名称：vertx-framework(vertx框架)
+        2、项目定性：鉴于vertx目前已经在公司内部推广，且处于早期阶段，所以进行基准的封装与集成；封装成公用的vertx+spring框架，
+                    主要包含: 1、集群模式
+                              2、本地vertx模式
+        3、负责组织：由瑞眼科技技术创新部统筹，监控实施，经测试稳健后统一发布；后期如有需求，且通过高层组织一致统一可对外发布；
+        4、    其他：定义为非盈利项目，组织定义为org.rayeye.vertx，版本以1.0为基准进行研发；
+    </description>
+
+    <developers>
+        <developer>
+            <id>Neil</id>
+            <name>Neil.Zhou</name>
+            <email>zhouchang@rayeye.cn</email>
+            <url/>
+            <roles>
+                <role>Technical Director</role>
+                <role>Architect</role>
+            </roles>
+            <organization>org.rayeye</organization>
+            <organizationUrl>http://www.rayeye.cn</organizationUrl>
+            <properties>
+                <dept>No</dept>
+            </properties>
+        </developer>
+    </developers>
+    <!-- 其他贡献者 -->
+    <contributors>
+        <contributor>
+            <name/><email/><url/><organization/><organizationUrl/><roles/>
+        </contributor>
+    </contributors>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <org.log>1.0</org.log>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.rayeye</groupId>
+            <artifactId>org-log</artifactId>
+            <version>${org.log}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgument>-Xlint:unchecked</compilerArgument>
+                </configuration>
+            </plugin>
+            <!-- skip test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <modules>
+        <module>vertx-core</module>
+        <module>vertx-api-test</module>
+    </modules>
+</project>

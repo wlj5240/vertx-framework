@@ -1,3 +1,13 @@
-# vertx-framework
-本项目是基于vertx+spring搭建的框架，支持集群、单例vertx对象；优点有很多，需要大家一点一点的去发现；其中依赖OSK项目和集群需要vertx-zookeeper(https://github.com/Neil-Zhou/vertx-zookeeper);
-目前项目中有一个是单例的测试项目，后期将补充集群的说明；
+vertx-framework
+
+===================================
+## 一、概述
+	1、项目名称：vertx-framework
+	2、项目定性：基于vertx+spring构建的架构，简单易用，可以从原有的ssh等体系平滑过渡；目前支持集群、单例；集群需要依赖OSK项目和vertx-zookeeper(https://github.com/Neil-Zhou/vertx-zookeeper); 目前项目中有一个是单例的测试项目，可参考使用;后期将逐步优化和完善文档；
+	3、负责组织：目前项目是从公司内部系统抽离的新项目，将代码进行重构和优化，使用更加简单和容易上手；
+	4、    其他：定义为非盈利项目，组织定义为org.rayeye，版本以1.0为基准进行研发；
+
+## 二、结构
+#### 总体目录
+	
+  
