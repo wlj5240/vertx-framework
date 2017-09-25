@@ -18,10 +18,10 @@ import io.vertx.ext.web.Router;
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class SingleVertxRouter {
-    private static Router router;
+    private volatile Router router;
     private static SingleVertxRouter instance;
     public SingleVertxRouter() {
-        router=Router.router(StandardVertxUtil.getStandardVertx());
+        this.router=Router.router(StandardVertxUtil.getStandardVertx());
     }
     public static SingleVertxRouter getInstance() {
         if (instance == null) {
@@ -42,6 +42,13 @@ public class SingleVertxRouter {
         if (instance == null) {
             instance =new SingleVertxRouter();
         }
+        return instance.router;
+    }
+    public static Router setRouter(Router router){
+        if (instance == null) {
+            instance =new SingleVertxRouter();
+        }
+        instance.router=router;
         return router;
     }
 }

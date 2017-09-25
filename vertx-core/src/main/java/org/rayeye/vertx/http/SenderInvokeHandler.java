@@ -37,8 +37,8 @@ public class SenderInvokeHandler {
      * @method      sendProcess
      * @author      Neil.Zhou
      * @param ctx router上下文
-     * @param processor 对应的URI路由资源
-     * @param params
+     * @param processor 对应的URI路由资源
+     * @param params
      * @return      void
      * @exception
      * @date        2017/9/20 23:18
@@ -65,8 +65,8 @@ public class SenderInvokeHandler {
      * @method      sendProcess
      * @author      Neil.Zhou
      * @param ctx router上下文
-     * @param processor 对应的URI路由资源
-     * @param params  请求参数
+     * @param processor 对应的URI路由资源
+     * @param params  请求参数
      * @param method 处理器中的方法
      * @return      void
      * @exception
@@ -96,10 +96,10 @@ public class SenderInvokeHandler {
      * @method      sendProcess
      * @author      Neil.Zhou
      * @param ctx router上下文
-     * @param processor 对应的URI路由资源
-     * @param method  处理器中的方法
-     * @param params 请求参数
-     * @param replyHandler 回调函数
+     * @param processor 对应的URI路由资源
+     * @param method  处理器中的方法
+     * @param params 请求参数
+     * @param replyHandler 回调函数
      * @return      void
      * @exception
      * @date        2017/9/20 23:28
@@ -112,8 +112,8 @@ public class SenderInvokeHandler {
      * @method      sendNSyncProcess
      * @author      Neil.Zhou
      * @param ctx router上下文
-     * @param processor 对应的URI路由资源
-     * @param params 请求参数
+     * @param processor 对应的URI路由资源
+     * @param params 请求参数
      * @return      void
      * @exception
      * @date        2017/9/20 23:31
@@ -128,9 +128,9 @@ public class SenderInvokeHandler {
      * @method      sendNSyncProcess
      * @author      Neil.Zhou
      * @param ctx router上下文
-     * @param processor 对应的URI路由资源
-     * @param method 处理器中的方法
-     * @param params 请求参数
+     * @param processor 对应的URI路由资源
+     * @param method 处理器中的方法
+     * @param params 请求参数
      * @return      void
      * @exception
      * @date        2017/9/20 23:34

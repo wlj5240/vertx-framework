@@ -66,16 +66,7 @@ public class RouterHandlerFactory {
      */
     public Router createRouter() {
         Router router = SingleVertxRouter.getRouter();
-        router.route().handler(ctx -> {
-            logger.trace("The HTTP service request address information ===>path:{}, uri:{}, method:{}",ctx.request().path(),ctx.request().absoluteURI(),ctx.request().method());
-            logger.trace("The requester auth information ===>Authorization:{}, Version:{}, Dev:{}",ctx.request().headers().get("Authorization"),ctx.request().headers().get("Version"),ctx.request().headers().get("Dev"));
-            ctx.response().headers().add(CONTENT_TYPE, "application/json; charset=utf-8");
-            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_METHODS, "POST, GET, OPTIONS, PUT, DELETE, HEAD");
-            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_HEADERS, "X-PINGOTHER, Origin,Content-Type, Accept, X-Requested-With,Dev,Authorization,Version,orgCode");
-            ctx.response().headers().add(ACCESS_CONTROL_MAX_AGE, "1728000");
-            ctx.next();
-        });
+        setHeader(router);// 如果需要特色设置，可自行在具体的api中修改
         Set<HttpMethod> method = new HashSet<HttpMethod>(){{
             add(HttpMethod.GET);
             add(HttpMethod.POST);
@@ -104,6 +95,37 @@ public class RouterHandlerFactory {
         return router;
     }
 
+    /**
+     * 设置header，目前所有请求就会优先被初始设置response header
+     * @method      setHeader
+     * @author      Neil.Zhou
+     * @param router
+     * @return      void
+     * @exception
+     * @date        2017/9/25 13:24
+     */
+    private void setHeader(Router router){
+        router.route().order(-10).handler(ctx -> {
+            logger.trace("The HTTP service request address information ===>path:{}, uri:{}, method:{}",ctx.request().path(),ctx.request().absoluteURI(),ctx.request().method());
+            logger.trace("The requester auth information ===>Authorization:{}, Version:{}, Dev:{}",ctx.request().headers().get("Authorization"),ctx.request().headers().get("Version"),ctx.request().headers().get("Dev"));
+            ctx.response().headers().add(CONTENT_TYPE, "application/json; charset=utf-8");
+            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_METHODS, "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+            ctx.response().headers().add(ACCESS_CONTROL_ALLOW_HEADERS, "X-PINGOTHER, Origin,Content-Type, Accept, X-Requested-With,Dev,Authorization,Version,orgCode");
+            ctx.response().headers().add(ACCESS_CONTROL_MAX_AGE, "1728000");
+            ctx.next();
+        });
+    }
+    /**
+     * 开始注册router==》handler
+     * @method      registerNewHandler
+     * @author      Neil.Zhou
+     * @param router
+     * @param handler
+     * @return      void
+     * @exception
+     * @date        2017/9/25 13:26
+     */
     private void registerNewHandler(Router router,Class<?> handler) throws Exception {
         String root = GATEWAY_PREFIX;
         if(!root.startsWith("/")){

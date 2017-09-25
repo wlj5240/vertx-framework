@@ -85,6 +85,78 @@
                 <version>2.9.1</version>
                 <configuration>
                     <aggregate>true</aggregate>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
+                    <tags>
+                        <tag>
+                            <name>ProjectName</name>
+                            <placement>a</placement>
+                            <head>项目名称</head>
+                        </tag>
+                        <tag>
+                            <name>Package</name>
+                            <placement>a</placement>
+                            <head>文件所属包</head>
+                        </tag>
+                       <!-- <tag>
+                            <name>ClassName</name>
+                            <placement>a</placement>
+                            <head>Class类名称</head>
+                        </tag>
+                        <tag>
+                            <name>method</name>
+                            <placement>a</placement>
+                            <head>函数名称</head>
+                        </tag>-->
+                        <tag>
+                            <name>Description</name>
+                            <placement>a</placement>
+                            <head>描述</head>
+                        </tag>
+                        <tag>
+                            <name>Author</name>
+                            <placement>a</placement>
+                            <head>作者</head>
+                        </tag>
+
+                        <tag>
+                            <name>CreateDate</name>
+                            <placement>a</placement>
+                            <head>创建时间</head>
+                        </tag>
+                        <tag>
+                            <name>UpdateUser</name>
+                            <placement>a</placement>
+                            <head>修改人</head>
+                        </tag>
+                        <tag>
+                            <name>UpdateDate</name>
+                            <placement>a</placement>
+                            <head>更新时间</head>
+                        </tag>
+                        <tag>
+                            <name>UpdateRemark</name>
+                            <placement>a</placement>
+                            <head>更新备注</head>
+                        </tag>
+                        <tag>
+                            <name>Version</name>
+                            <placement>a</placement>
+                            <head>版本</head>
+                        </tag>
+                        <tag>
+                            <name>date</name>
+                            <placement>a</placement>
+                            <head>创建时间</head>
+                        </tag>
+
+                        <tag>
+                            <name>exception</name>
+                            <placement>a</placement>
+                            <head>异常</head>
+                        </tag>
+                    </tags>
                 </configuration>
             </plugin>
         </plugins>

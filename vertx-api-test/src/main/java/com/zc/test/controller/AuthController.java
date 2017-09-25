@@ -13,6 +13,8 @@ import org.rayeye.vertx.http.SenderInvokeHandler;
 import org.rayeye.vertx.result.ResultOb;
 import org.rayeye.vertx.util.ParamUtil;
 
+import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
+
 /**
  * 权限入口
  * @ProjectName:
@@ -38,7 +40,16 @@ public class AuthController extends SenderInvokeHandler{
             JsonObject param = ParamUtil.getRequestParams(ctx);
             logger.debug("参数:"+param.encode());
             ctx.response().setStatusCode(200);
-            ctx.response().end(ResultOb.build().setMsg("Hello，欢迎使用测试地址.....").toString());
+            ctx.response().end(ResultOb.build().setMsg("Hello，Welcome to use Vertx.....").toString());
+        };
+    }
+
+    @RouteMapping(value = "/hello", method = RouteMethod.GET)
+    public Handler<RoutingContext> doHello() {
+        return ctx -> {
+            JsonObject param = ParamUtil.getRequestParams(ctx);
+            logger.debug("参数:"+param.encode());
+            ctx.response().setStatusCode(200).putHeader(CONTENT_TYPE, "text/plain").end("Hello,Welcome to use Vertx.....");
         };
     }
 
