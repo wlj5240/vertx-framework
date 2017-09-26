@@ -32,7 +32,7 @@ import java.util.Set;
 public class RegistryHandlersFactory {
     private static Log logger = LogFactory.get(RegistryHandlersFactory.class);
 
-    public static volatile String BASE_ROUTER="/";
+    public static volatile String BASE_ROUTER="";
     // 需要扫描注册的Router路径
     private static volatile Reflections reflections =null;
     public RegistryHandlersFactory(String handlerScanAddress,String appPrefix) {
@@ -65,37 +65,32 @@ public class RegistryHandlersFactory {
                     } else {
                         busAddressPrefix = routeHandler.value();
                     }
-                    if (busAddressPrefix.startsWith("/")) {
-                        busAddressPrefix = busAddressPrefix.substring(1, busAddressPrefix.length());
-                    }
-                    if (!BASE_ROUTER.endsWith("/")) {
+                    if (StringUtils.isNotBlank(BASE_ROUTER)&&!BASE_ROUTER.endsWith("/")) {
                         busAddressPrefix = BASE_ROUTER + "/" + busAddressPrefix;
                     } else {
                         busAddressPrefix = BASE_ROUTER + busAddressPrefix;
                     }
-                    if (busAddressPrefix.endsWith("/")) {
+                    busAddressPrefix=busAddressPrefix.replace("//","/");
+                    if (busAddressPrefix.trim().length()>1&&busAddressPrefix.endsWith("/")) {
                         busAddressPrefix = busAddressPrefix.substring(0, busAddressPrefix.length() - 1);
                     }
-                    if (busAddressPrefix.startsWith("/")) {
-                        busAddressPrefix = busAddressPrefix.substring(1, busAddressPrefix.length());
-                    }
-                    if (BASE_ROUTER.equals(busAddressPrefix)) {
+                    if (BASE_ROUTER.equals(busAddressPrefix)||StandardVertxUtil.isCluster) {
                         /***** 每一个方法都部署一个verticle *****/
                         Method[] methods = service.getDeclaredMethods();
                         for (Method method : methods) {
                             if (method.isAnnotationPresent(ServiceMethod.class)) {
                                 ServiceMethod serviceMethod = method.getAnnotation(ServiceMethod.class);
                                 String methodTarget = serviceMethod.value();
-                                if (!methodTarget.startsWith("/")) {
+                                if (!methodTarget.startsWith("/")&&!busAddressPrefix.endsWith("/")) {
                                     methodTarget = "/" + methodTarget;
                                 }
                                 logger.trace("[Method] The register processor address is {}", EventBusAddress.positiveFormate(busAddressPrefix + methodTarget));
-                                StandardVertxUtil.getStandardVertx().deployVerticle(new VerticleHandlerFactory(toLowerCaseFirstOne(service.getSimpleName()), EventBusAddress.positiveFormate(busAddressPrefix.concat(methodTarget))), new DeploymentOptions());
+                                StandardVertxUtil.getStandardVertx().deployVerticle(new VerticleHandlerFactory(EventBusAddress.toLowerCaseFirstOne(service.getSimpleName()), EventBusAddress.positiveFormate(busAddressPrefix.concat(methodTarget))), new DeploymentOptions());
                             }
                         }
                     } else {
                         logger.trace("The register processor address is {}", EventBusAddress.positiveFormate(busAddressPrefix));
-                        StandardVertxUtil.getStandardVertx().deployVerticle(new VerticleHandlerFactory(toLowerCaseFirstOne(service.getSimpleName()), EventBusAddress.positiveFormate(busAddressPrefix)), new DeploymentOptions());
+                        StandardVertxUtil.getStandardVertx().deployVerticle(new VerticleHandlerFactory(EventBusAddress.toLowerCaseFirstOne(service.getSimpleName()), EventBusAddress.positiveFormate(busAddressPrefix)), new DeploymentOptions());
                     }
                 }
             } catch (Exception e) {
@@ -112,11 +107,11 @@ public class RegistryHandlersFactory {
      * @exception
      * @date        2017/9/21 0:21
      */
-    private static String toLowerCaseFirstOne(String serviceName){
+   /* private static String toLowerCaseFirstOne(String serviceName){
         if(Character.isLowerCase(serviceName.charAt(0))) {
             return serviceName;
         }else {
             return (new StringBuilder()).append(Character.toLowerCase(serviceName.charAt(0))).append(serviceName.substring(1)).toString();
         }
-    }
+    }*/
 }

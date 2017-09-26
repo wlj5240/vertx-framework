@@ -93,6 +93,7 @@ public class StandardVertxUtil {
         }catch (Exception e) {
             logger.error(e);
         }
+        isCluster=true;
             return standardVertx;
     }
 
@@ -114,6 +115,7 @@ public class StandardVertxUtil {
         }catch (Exception e){
             logger.error(e);
         }
+        isCluster=true;
         return standardVertx;
     }
 

@@ -63,4 +63,20 @@ public class EventBusAddress {
         Objects.requireNonNull(address, "address must not be null.");
         return address.trim().replace(".","/");
     }
+    /**
+     * 将类名首字母转成小写
+     * @method      toLowerCaseFirstOne
+     * @author      Neil.Zhou
+     * @param s
+     * @return      java.lang.String
+     * @exception
+     * @date        2017/9/26 15:01
+     */
+    public static String toLowerCaseFirstOne(String className){
+        if(Character.isLowerCase(className.charAt(0))) {
+            return className;
+        }else {
+            return (new StringBuilder()).append(Character.toLowerCase(className.charAt(0))).append(className.substring(1)).toString();
+        }
+    }
 }

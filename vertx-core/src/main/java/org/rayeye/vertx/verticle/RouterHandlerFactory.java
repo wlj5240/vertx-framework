@@ -154,7 +154,7 @@ public class RouterHandlerFactory {
                         routeUrl=routeUrl.substring(1);
                     }
                 }
-                String url =root.concat("/" +routeUrl);
+                String url =root.concat("/" +routeUrl).replace("//","/");
                 Handler<RoutingContext> methodHandler = (Handler<RoutingContext>) method.invoke(instance);
                 logger.trace("Register New Handler -> {}:{}", routeMethod, url);
                 switch (routeMethod) {

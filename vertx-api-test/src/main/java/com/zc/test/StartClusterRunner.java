@@ -26,20 +26,23 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */
-public class StartRunner{
+public class StartClusterRunner {
 
     public static void main(String[] args) throws Exception {
         // 设置使用日志类型
         LogFactory.setCurrentLogFactory(new Log4j2LogFactory());
-        Log logger = LogFactory.get(StartRunner.class.getName());
+        Log logger = LogFactory.get(StartClusterRunner.class.getName());
          ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         logger.debug("=======================Runner  Deployment======================");
-        StandardVertxUtil.getStandardVertx(Vertx.vertx(new VertxOptions()));
+        StandardVertxUtil.setClusterVertx(Vertx.vertx(new VertxOptions()),"192.168.10.186");
         /***** 设置扫描器 api、handler(service) ***/
         // 直接使用框架默认模式启动
-        //DeployVertxServer.startDeploy(new RouterHandlerFactory("com.zc.test.controller","api").createRouter(),"com.zc.test.service",8989);
-        // 添加自定义Router处理
-        DeployVertxServer.startDeploy(new RouterHandler("com.zc.test.controller","/api").specificRouter(),"com.zc.test.service","/api",8989);
+        //DeployVertxServer.startDeploy(new RouterHandlerFactory("com.zc.test.controller","api").abstractRouter(),"com.zc.test.service",8989);
+        // 添加自定义Router处理（这个建议是只用在httpserver应用中）
+        DeployVertxServer.startDeploy(new RouterHandler("com.zc.test.controller","/api").abstractRouter(),"com.zc.test.service","/api",8989);
+
+        // 如果是业务应用层，可直接发布
+       // DeployVertxServer.startDeploy("com.zc.test.service","/api/center");
 
     }
 }
