@@ -22,6 +22,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface VerticleMapping {
     String value() default "";
+    @Deprecated
     boolean isCluster() default false;
     boolean isServiceReg() default false;
 }
