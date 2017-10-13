@@ -45,7 +45,7 @@
         <dependency>
             <groupId>org.rayeye.vertx</groupId>
             <artifactId>vertx-core</artifactId>
-            <version>1.10</version>
+            <version>1.12</version>
         </dependency>
         <!--   vertx  -->
         <dependency>

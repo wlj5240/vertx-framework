@@ -24,6 +24,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RouteHandler {
     String value() default "";
+    boolean isAuth() default false;
     /*** 是否直接暴露(开放平台) ***/
     boolean isOpen() default false;
 }

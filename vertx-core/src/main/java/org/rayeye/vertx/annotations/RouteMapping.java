@@ -25,6 +25,7 @@ public @interface RouteMapping {
     String value() default "";
     /**** 是否覆盖 *****/
     boolean isCover() default true;
+   boolean isAuth() default false;
     /**** 使用http method *****/
     RouteMethod method() default RouteMethod.GET;
     /**** 接口描述 *****/

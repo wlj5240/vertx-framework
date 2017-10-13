@@ -13,7 +13,7 @@
     <artifactId>vertx-core</artifactId>
     <name>vertx 核心包</name>
     <packaging>jar</packaging>
-    <version>1.10</version>
+    <version>1.12</version>
 
     <description>
         1、模块名称：vertx-core

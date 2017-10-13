@@ -7,12 +7,15 @@ import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
 import io.vertx.ext.web.handler.CookieHandler;
 import io.vertx.ext.web.handler.CorsHandler;
+import io.vertx.ext.web.handler.sockjs.*;
+import org.apache.commons.lang3.StringUtils;
 import org.rayeye.common.log.Log;
 import org.rayeye.common.log.LogFactory;
 import org.rayeye.vertx.annotations.RouteHandler;
 import org.rayeye.vertx.annotations.RouteMapping;
 import org.rayeye.vertx.annotations.RouteMethod;
 import org.rayeye.vertx.standard.SingleVertxRouter;
+import org.rayeye.vertx.standard.StandardVertxUtil;
 import org.reflections.Reflections;
 
 import java.lang.reflect.Method;
@@ -76,9 +79,9 @@ public class RouterHandlerFactory {
             add(HttpMethod.HEAD);
         }};
         /** 添加跨域的方法 **/
-        router.route().handler(CorsHandler.create("*").allowedMethods(method));
-        router.route().handler(CookieHandler.create());
-        router.route().handler(BodyHandler.create());
+        router.route().order(-9).handler(CorsHandler.create("*").allowedMethods(method));
+        router.route().order(-8).handler(CookieHandler.create());
+        router.route().order(-7).handler(BodyHandler.create());
         try {
             logger.trace("Register available request handlers...");
             Set<Class<?>> handlers = reflections.getTypesAnnotatedWith(RouteHandler.class);
@@ -92,6 +95,135 @@ public class RouterHandlerFactory {
         } catch (Exception e) {
             logger.error(e,"Manually Register Handler Fail，Error details："+e.getMessage());
         }
+        // 加入socketJS
+        joinSocketJS();
+        return router;
+    }
+
+    /**
+     * @method      createSocketRouter
+     * @author      Neil.Zhou
+     * @param inbound 接收客户端消息的地址匹配
+     * @param outbound 发送客户端消息的地址匹配
+     * @return      io.vertx.ext.web.Router
+     * @exception
+     * @date        2017-10-13 19:35
+     */
+    public Router createSocketRouter(String inbound,String outbound) {
+        Router router = SingleVertxRouter.getRouter();
+        setHeader(router);// 如果需要特色设置，可自行在具体的api中修改
+        Set<HttpMethod> method = new HashSet<HttpMethod>(){{
+            add(HttpMethod.GET);
+            add(HttpMethod.POST);
+            add(HttpMethod.OPTIONS);
+            add(HttpMethod.PUT);
+            add(HttpMethod.DELETE);
+            add(HttpMethod.HEAD);
+        }};
+        /** 添加跨域的方法 **/
+        router.route().order(-9).handler(CorsHandler.create("*").allowedMethods(method));
+        router.route().order(-8).handler(CookieHandler.create());
+        router.route().order(-7).handler(BodyHandler.create());
+        try {
+            logger.trace("Register available request handlers...");
+            Set<Class<?>> handlers = reflections.getTypesAnnotatedWith(RouteHandler.class);
+            for (Class<?> handler : handlers) {
+                try {
+                    registerNewHandler(router,handler);
+                } catch (Exception e) {
+                    logger.error(e,"Error register {}", handler);
+                }
+            }
+        } catch (Exception e) {
+            logger.error(e,"Manually Register Handler Fail，Error details："+e.getMessage());
+        }
+        // 加入socketJS
+        joinSocketJS();
+        return router;
+    }
+
+    /**
+     * 想Router加入SocketJS支持
+     * @method      joinSocketJS
+     * @author      Neil.Zhou
+     * @param inbound 接收客户端消息的地址匹配
+     * @param outbound 发送客户端消息的地址匹配
+     * @return      io.vertx.ext.web.Router
+     * @exception
+     * @date        2017-10-13 15:40
+     */
+    public Router joinSocketJS(String inbound,String outbound) {
+        Router router = SingleVertxRouter.getRouter();
+        // ping 2s
+        SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
+        SockJSHandler sockJSHandler = SockJSHandler.create(StandardVertxUtil.getLocalVertx(), options);
+        // 允许通过的规则
+        BridgeOptions bridgeOptions = new BridgeOptions();
+        if(StringUtils.isNotBlank(inbound)){
+            bridgeOptions.addInboundPermitted(new PermittedOptions().setAddressRegex(inbound));
+        }
+        if(StringUtils.isNotBlank(outbound)){
+            bridgeOptions.addOutboundPermitted(new PermittedOptions().setAddressRegex(outbound));
+        }
+        sockJSHandler.bridge(bridgeOptions, event -> {
+            if (event.type() == BridgeEventType.SOCKET_CREATED) {
+                //create bus
+                logger.trace("The socket channel to establish.");
+            }else if (event.type() == BridgeEventType.REGISTER) {
+                logger.trace("Register [{}] event on the eventbus",event.getRawMessage().getString("address"));
+            }else if (event.type() == BridgeEventType.RECEIVE) {
+                logger.trace("The Socket client to the server sends the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.SEND) {//3、发送消息
+                logger.trace("The Socket server to the client sends the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.PUBLISH) {//4、发布消息
+                logger.trace("The Socket server to the client publish the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.UNREGISTER) {//5、注销事件
+                logger.trace("The socket channel to unregister.");
+            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {//6、关闭
+                logger.trace("The socket channel to closed.");
+            }
+            event.complete(true);
+        });
+        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
+        return router;
+    }
+    /**
+     * 想Router加入SocketJS支持(默认所有地址)
+     * @method      joinSocketJS
+     * @author      Neil.Zhou
+     * @return      io.vertx.ext.web.Router
+     * @exception
+     * @date        2017-10-13 15:40
+     */
+    public Router joinSocketJS() {
+        Router router = SingleVertxRouter.getRouter();
+        // ping 2s
+        SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
+        SockJSHandler sockJSHandler = SockJSHandler.create(StandardVertxUtil.getLocalVertx(), options);
+        // 允许通过的规则
+        BridgeOptions bridgeOptions = new BridgeOptions()
+                .addInboundPermitted(new PermittedOptions().setAddressRegex("^([A-Za-z0-9_]|([/]|[\\.]))*$"))
+                .addOutboundPermitted(new PermittedOptions().setAddressRegex("^([A-Za-z0-9_]|([/]|[\\.]))*$"));
+        sockJSHandler.bridge(bridgeOptions, event -> {
+            if (event.type() == BridgeEventType.SOCKET_CREATED) {
+                //create bus
+                logger.trace("The socket channel to establish.");
+            }else if (event.type() == BridgeEventType.REGISTER) {
+                logger.trace("Register [{}] event on the eventbus",event.getRawMessage().getString("address"));
+            }else if (event.type() == BridgeEventType.RECEIVE) {
+                logger.trace("The Socket client to the server sends the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.SEND) {//3、发送消息
+                logger.trace("The Socket server to the client sends the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.PUBLISH) {//4、发布消息
+                logger.trace("The Socket server to the client publish the request,the message is {}",event.getRawMessage().encode());
+            }else if (event.type() == BridgeEventType.UNREGISTER) {//5、注销事件
+                logger.trace("The socket channel to unregister.");
+            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {//6、关闭
+                logger.trace("The socket channel to closed.");
+            }
+            event.complete(true);
+        });
+        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
         return router;
     }
 
