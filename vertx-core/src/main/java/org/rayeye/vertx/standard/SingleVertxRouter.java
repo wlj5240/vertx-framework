@@ -5,16 +5,16 @@ import io.vertx.ext.web.Router;
 /**
  * 获得全局的Router对象
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.standard
- * @ClassName: SingleVertxRouter
- * @Description: 获得全局的Router对象
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/21 10:48
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/21 10:48
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.standard
+ * @className: SingleVertxRouter
+ * @description: 获得全局的Router对象
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/21 10:48
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/21 10:48
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class SingleVertxRouter {

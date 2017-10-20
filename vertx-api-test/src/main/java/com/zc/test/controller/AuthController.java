@@ -17,16 +17,16 @@ import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
 
 /**
  * 权限入口
- * @ProjectName:
- * @Package:        com.zc.test.controller
- * @ClassName:      AuthController
- * @Description:    Describes the function of the class
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/21 12:35
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/21 12:35
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        com.zc.test.controller
+ * @className:      AuthController
+ * @description:    Describes the function of the class
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/21 12:35
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/21 12:35
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */

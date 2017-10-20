@@ -30,30 +30,30 @@ import static io.vertx.core.http.HttpHeaders.ACCESS_CONTROL_MAX_AGE;
 /**
  * router 扫描注册器
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.verticle
- * @ClassName: RouterRegistryHandlersFactory
- * @Description: router 扫描注册器
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/21 0:26
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/21 0:26
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.verticle
+ * @className: RouterRegistryHandlersFactory
+ * @description: router 扫描注册器
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/21 0:26
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/21 0:26
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class RouterRegistryHandlersFactory extends AbstractVerticle {
     private static Log logger = LogFactory.get(RouterRegistryHandlersFactory.class);
     protected Router router;
     HttpServer server;
-    // 默认http server端口
+    /** 默认http server端口 **/
     public static volatile int port=8080;
 
     /** Constructs a new RouterRegistryHandlersFactory. */
     public RouterRegistryHandlersFactory(int port) {
         this.router= SingleVertxRouter.getRouter();
         if(port>0){
-            this.port=port;
+            port=port;
         }
     }
     public RouterRegistryHandlersFactory(Router router) {
@@ -63,7 +63,7 @@ public class RouterRegistryHandlersFactory extends AbstractVerticle {
     public RouterRegistryHandlersFactory(Router router,int port) {
         this.router=router;
         if(port>0){
-            this.port=port;
+            port=port;
         }
     }
 

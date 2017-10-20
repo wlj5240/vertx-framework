@@ -22,21 +22,22 @@ import java.util.regex.Pattern;
  * verticle 处理器工厂
  * 支持集群、单例
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.verticle
- * @ClassName: VerticleHandlerFactory
- * @Description: verticle 处理器工厂
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/20 18:22
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/20 18:22
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.verticle
+ * @className: VerticleHandlerFactory
+ * @description: verticle 处理器工厂
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/20 18:22
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/20 18:22
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class VerticleHandlerFactory extends AbstractVerticle {
     private final Object service;
     private String busAddress;
+    final Pattern p=Pattern.compile("[\u4e00-\u9fa5]");
 
     public VerticleHandlerFactory(String beanName, String eventBusAddress) {
         ApplicationContext applicationContext=SpringContextUtil.getApplicationContext();
@@ -71,7 +72,6 @@ public class VerticleHandlerFactory extends AbstractVerticle {
                 result.setMsg(error.getString("message","服务正忙,稍后再试."));
             }
         }catch(Exception ex){
-            Pattern p=Pattern.compile("[\u4e00-\u9fa5]");
             Matcher matcher=p.matcher(errorObj.getMessage());
             if(matcher.find()){
                 result.setMsg(errorObj.getMessage());
@@ -121,7 +121,7 @@ public class VerticleHandlerFactory extends AbstractVerticle {
                         result.setData(errorObj.getCause().getLocalizedMessage());
                     }
                 }else{
-                    Pattern p=Pattern.compile("[\u4e00-\u9fa5]");
+
                     if(e.getCause()!=null&& StringUtils.isNotBlank(e.getCause().getMessage())){
                         Matcher matcher=p.matcher(e.getCause().getMessage());
                         if(matcher.find()){

@@ -17,28 +17,28 @@ import java.util.Set;
 /**
  * 处理器注册工厂
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.http
- * @ClassName: RegistryHandlersFactory
- * @Description: 处理器注册工厂
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/20 23:38
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/20 23:38
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.http
+ * @className: RegistryHandlersFactory
+ * @description: 处理器注册工厂
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/20 23:38
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/20 23:38
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class RegistryHandlersFactory {
     private static Log logger = LogFactory.get(RegistryHandlersFactory.class);
 
     public static volatile String BASE_ROUTER="";
-    // 需要扫描注册的Router路径
+    /** 需要扫描注册的Router路径 **/
     private static volatile Reflections reflections =null;
     public RegistryHandlersFactory(String handlerScanAddress,String appPrefix) {
         Objects.requireNonNull(handlerScanAddress, "The router package address scan is empty.");
         reflections = new Reflections(handlerScanAddress);
-        this.BASE_ROUTER=appPrefix;
+        BASE_ROUTER=appPrefix;
     }
     public RegistryHandlersFactory(String handlerScanAddress) {
         Objects.requireNonNull(handlerScanAddress, "The router package address scan is empty.");
@@ -55,8 +55,8 @@ public class RegistryHandlersFactory {
     public void registerVerticle() {
         logger.trace("Register Service Verticle...");
         Set<Class<?>> verticles = reflections.getTypesAnnotatedWith(VerticleMapping.class);
-        String busAddressPrefix="";
         for (Class<?> service : verticles) {
+            String busAddressPrefix="";
             try {
                 if (service.isAnnotationPresent(VerticleMapping.class)) {
                     VerticleMapping routeHandler = service.getAnnotation(VerticleMapping.class);

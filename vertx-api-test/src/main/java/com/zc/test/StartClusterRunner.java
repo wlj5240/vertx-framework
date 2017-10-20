@@ -13,16 +13,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * Vertx main启动
- * @ProjectName:
- * @Package:        com.zc.test
- * @ClassName:      StartRunner
- * @Description:   Vertx main启动
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/21 12:37
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/21 12:37
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        com.zc.test
+ * @className:      StartRunner
+ * @description:   Vertx main启动
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/21 12:37
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/21 12:37
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */
@@ -38,7 +38,7 @@ public class StartClusterRunner {
         /***** 设置扫描器 api、handler(service) ***/
         // 直接使用框架默认模式启动
         //DeployVertxServer.startDeploy(new RouterHandlerFactory("com.zc.test.controller","api").abstractRouter(),"com.zc.test.service",8989);
-        // 添加自定义Router处理（这个建议是只用在httpserver应用中）
+        //添加自定义Router处理（这个建议是只用在httpserver应用中）
         DeployVertxServer.startDeploy(new RouterHandler("com.zc.test.controller","/api").abstractRouter(),"com.zc.test.service","/api",8989);
 
         // 如果是业务应用层，可直接发布

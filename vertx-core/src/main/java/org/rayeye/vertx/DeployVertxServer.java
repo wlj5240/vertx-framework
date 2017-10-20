@@ -11,16 +11,16 @@ import java.io.IOException;
 
 /**
  * 开始注册vertx相关服务
- * @ProjectName:	vertx-core
- * @Package:        org.rayeye.vertx
- * @ClassName:      DeployVertxServer
- * @Description:    Describes the function of the class
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/21 10:15
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/21 10:15
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:	vertx-core
+ * @package:        org.rayeye.vertx
+ * @className:      DeployVertxServer
+ * @description:    Describes the function of the class
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/21 10:15
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/21 10:15
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */

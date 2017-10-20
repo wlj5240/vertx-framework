@@ -12,16 +12,16 @@ import org.springframework.stereotype.Service;
  * 如果非降级API定义，可以继承AbstractService
  * 如果有API定一层， 不推荐继承AbstractService 或使用直接发送调用业务
  *
- * @ProjectName: test
- * @Package: com.zc.service
- * @ClassName: AuthService
- * @Description: Describes the function of the class
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/21 11:38
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/21 11:38
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: test
+ * @package: com.zc.service
+ * @className: AuthService
+ * @description: Describes the function of the class
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/21 11:38
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/21 11:38
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 @VerticleMapping

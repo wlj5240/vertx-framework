@@ -12,16 +12,16 @@ import org.rayeye.vertx.verticle.RouterHandlerFactory;
 /**
  * 自定义Router规则
  *
- * @ProjectName: vertx-framework
- * @Package: com.zc.test.router
- * @ClassName: RouterHandler
- * @Description: Describes the function of the class
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/25 9:15
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/25 9:15
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-framework
+ * @package: com.zc.test.router
+ * @className: RouterHandler
+ * @description: Describes the function of the class
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/25 9:15
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/25 9:15
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class RouterHandler extends RouterHandlerFactory{

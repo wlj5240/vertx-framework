@@ -6,16 +6,16 @@ import org.springframework.context.ApplicationContextAware;
 
 /**
  * Spring 获取上下文工具
- * @ProjectName:
- * @Package:        org.rayeye.vertx.spring
- * @ClassName:      SpringContextUtil
- * @Description:    Spring 获取上下文工具
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 18:25
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 18:25
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        org.rayeye.vertx.spring
+ * @className:      SpringContextUtil
+ * @description:    Spring 获取上下文工具
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 18:25
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 18:25
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */
@@ -26,6 +26,7 @@ public class SpringContextUtil implements ApplicationContextAware {
     /**
      * 实现ApplicationContextAware接口的回调方法
      */
+    @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         SpringContextUtil.applicationContext = applicationContext;
     }

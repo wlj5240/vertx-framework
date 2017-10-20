@@ -4,16 +4,16 @@ import java.util.Objects;
 
 /**
  * 事件格式类
- * @ProjectName:
- * @Package:        org.rayeye.vertx.base
- * @ClassName:      EventBusAddress
- * @Description:    Describes the function of the class
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 18:50
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 18:50
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        org.rayeye.vertx.base
+ * @className:      EventBusAddress
+ * @description:    Describes the function of the class
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 18:50
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 18:50
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */

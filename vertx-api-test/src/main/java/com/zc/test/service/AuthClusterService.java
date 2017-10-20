@@ -13,16 +13,16 @@ import org.springframework.stereotype.Service;
  * 简单测试登录
  * （测试时建议分环境部署）
  *
- * @ProjectName: test
- * @Package: com.zc.service
- * @ClassName: Auth1Service
- * @Description: Describes the function of the class
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/21 11:38
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/21 11:38
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: test
+ * @package: com.zc.service
+ * @className: Auth1Service
+ * @description: Describes the function of the class
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/21 11:38
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/21 11:38
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 @VerticleMapping("/")

@@ -5,26 +5,32 @@ import io.vertx.core.json.Json;
 
 /**
  *  response响应集合消息
- * @ProjectName:    vertx-core
- * @Package:        org.rayeye.vertx.result
- * @ClassName:      ResultList
- * @Description:    响应集合消息
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 13:34
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 13:34
- * @UpdateRemark:   相应消息
- * @Version:        1.0
+ * @projectName:    vertx-core
+ * @package:        org.rayeye.vertx.result
+ * @className:      ResultList
+ * @description:    响应集合消息
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 13:34
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 13:34
+ * @updateRemark:   相应消息
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */
 public class ResultList<T> extends ResultOb{
-    private int total;     //共多少条
-    private int count;     //每页多少条
-    private int pagetotal;     //共多少页
-    private boolean hasNextPage; //有下一页
-    private boolean hasPrePage; //有上一页
-    private int nopage;  //第几页
+    /** 共多少条 **/
+    private int total;
+    /** 每页多少条 **/
+    private int count;
+    /** 共多少页 **/
+    private int pagetotal;
+    /** 有下一页 **/
+    private boolean hasNextPage;
+    /** 有上一页 **/
+    private boolean hasPrePage;
+    /** 第几页 **/
+    private int nopage;
 
     public int getTotal() {
         return total;
@@ -75,12 +81,18 @@ public class ResultList<T> extends ResultOb{
     }
 
     public ResultList(Paginator p) {
-        total = p.getTotalCount();     //共多少条
-        count = p.getLimit();     //每页多少条
-        pagetotal = p.getTotalPages();     //共多少页
-        nopage = p.getPage();  //第几页
-        hasNextPage = p.isHasNextPage(); //有下一页
-        hasPrePage = p.isHasPrePage(); //有上一页
+        //共多少条
+        total = p.getTotalCount();
+        //每页多少条
+        count = p.getLimit();
+        //共多少页
+        pagetotal = p.getTotalPages();
+        //第几页
+        nopage = p.getPage();
+        //有下一页
+        hasNextPage = p.isHasNextPage();
+        //有上一页
+        hasPrePage = p.isHasPrePage();
     }
     @Override
     public String toString(){

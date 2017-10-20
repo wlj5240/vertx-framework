@@ -25,20 +25,21 @@ import java.util.regex.Pattern;
  * Spring Service必须继承此类
  * 用于调度具体业务执行函数
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.spring
- * @ClassName: AbstractService
- * @Description: Describes the function of the class
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/26 14:03
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/26 14:03
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.spring
+ * @className: AbstractService
+ * @description: Describes the function of the class
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/26 14:03
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/26 14:03
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class AbstractService {
     private static Log logger = LogFactory.get(AbstractService.class);
+    private static final String PREFIX="/";
     /**
      * 当前类所有函数的入口
      * @method      execute
@@ -64,13 +65,13 @@ public class AbstractService {
                 } else {
                     serviceRouter = service.value();
                 }
-                if (StringUtils.isNotBlank(RegistryHandlersFactory.BASE_ROUTER)&&!RegistryHandlersFactory.BASE_ROUTER.endsWith("/")) {
-                    serviceRouter = RegistryHandlersFactory.BASE_ROUTER + "/" + serviceRouter;
+                if (StringUtils.isNotBlank(RegistryHandlersFactory.BASE_ROUTER)&&!RegistryHandlersFactory.BASE_ROUTER.endsWith(PREFIX)) {
+                    serviceRouter = RegistryHandlersFactory.BASE_ROUTER + PREFIX + serviceRouter;
                 } else {
                     serviceRouter = RegistryHandlersFactory.BASE_ROUTER +  serviceRouter;
                 }
-                serviceRouter=serviceRouter.replace("//","/");
-                if (serviceRouter.trim().length()>1&&serviceRouter.endsWith("/")) {
+                serviceRouter=serviceRouter.replace("//",PREFIX);
+                if (serviceRouter.trim().length()>1&&serviceRouter.endsWith(PREFIX)) {
                     serviceRouter = serviceRouter.substring(0, serviceRouter.length() - 1);
                 }
                 // 替换service router部分，求得函数
@@ -83,8 +84,8 @@ public class AbstractService {
                     //NOT_FOUND(HttpCode.HTTP_404, "NOT_FOUND", "数据不存在","数据不存在"),
                     return new JsonObject(ResultOb.build().setCode(HttpCode.HTTP_400).setMsg("[NOT_FOUND]请求资源无效.").toString());
                 }
-                if(!methodStr.startsWith("/")){
-                    methodStr="/"+methodStr;
+                if(!methodStr.startsWith(PREFIX)){
+                    methodStr=PREFIX+methodStr;
                 }
             }
             boolean isFound=false;
@@ -94,8 +95,8 @@ public class AbstractService {
                 if (method.isAnnotationPresent(ServiceMethod.class)) {
                     ServiceMethod serviceMethod = method.getAnnotation(ServiceMethod.class);
                     String methodTarget = serviceMethod.value();
-                    if (!methodTarget.startsWith("/")) {
-                        methodTarget = "/" + methodTarget;
+                    if (!methodTarget.startsWith(PREFIX)) {
+                        methodTarget =PREFIX + methodTarget;
                     }
                     if(methodTarget.equals(methodStr)){
                         isFound=true;
@@ -104,8 +105,8 @@ public class AbstractService {
                         // 判断是否是合适的请求类型
                         if(req.containsKey("method")){
                             RouteMethod routeMethod=Enum.valueOf(RouteMethod.class,req.getString("method"));
-                            for (RouteMethod _tag:routeMethods){
-                                if(_tag.equals(RouteMethod.ROUTE)||_tag.equals(routeMethod)){
+                            for (RouteMethod methodTag:routeMethods){
+                                if(methodTag.equals(RouteMethod.ROUTE)||methodTag.equals(routeMethod)){
                                     isExecuted=true;
                                     Method  mh = ReflectionUtils.findMethod(SpringContextUtil.getBean(EventBusAddress.toLowerCaseFirstOne(this.getClass().getSimpleName())).getClass(),method.getName(),new Class[]{JsonObject.class} );
                                     result=(JsonObject) ReflectionUtils.invokeMethod(mh,SpringContextUtil.getBean(EventBusAddress.toLowerCaseFirstOne(this.getClass().getSimpleName())),req.getJsonObject("params"));

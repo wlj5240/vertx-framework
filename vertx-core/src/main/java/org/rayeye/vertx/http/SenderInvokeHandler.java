@@ -15,16 +15,16 @@ import org.rayeye.vertx.standard.StandardVertxUtil;
 /**
  * 事件发送调用处理器
  *
- * @ProjectName: vertx-framework
- * @Package: org.rayeye.vertx.http
- * @ClassName: SenderInvokeHandler
- * @Description: 事件发送调用处理器
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/20 19:27
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/20 19:27
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-framework
+ * @package: org.rayeye.vertx.http
+ * @className: SenderInvokeHandler
+ * @description: 事件发送调用处理器
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/20 19:27
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/20 19:27
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class SenderInvokeHandler {

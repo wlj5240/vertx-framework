@@ -29,30 +29,32 @@ import static io.vertx.core.http.HttpHeaders.ACCESS_CONTROL_MAX_AGE;
 /**
  * Router 对象创建
  *
- * @ProjectName: vertx-core
- * @Package: org.rayeye.vertx.verticle
- * @ClassName: RouterHandlerFactory
- * @Description: Describes the function of the class
- * @Author: Neil.Zhou
- * @CreateDate: 2017/9/21 10:42
- * @UpdateUser: Neil.Zhou
- * @UpdateDate: 2017/9/21 10:42
- * @UpdateRemark: The modified content
- * @Version: 1.0
+ * @projectName: vertx-core
+ * @package: org.rayeye.vertx.verticle
+ * @className: RouterHandlerFactory
+ * @description: Describes the function of the class
+ * @author: Neil.Zhou
+ * @createDate: 2017/9/21 10:42
+ * @updateUser: Neil.Zhou
+ * @updateDate: 2017/9/21 10:42
+ * @updateRemark: The modified content
+ * @version: 1.0
  * <p>Copyright: Copyright (c) 2017</p>
  */
 public class RouterHandlerFactory {
     private static Log logger = LogFactory.get(RouterHandlerFactory.class);
 
-    // 需要扫描注册的Router路径
+    /** 需要扫描注册的Router路径 **/
     private static volatile Reflections reflections = new Reflections("com.rayeye");
-    // 默认api前缀
+    /** 默认api前缀 **/
     public static volatile String GATEWAY_PREFIX="/";
 
-    public RouterHandlerFactory(String routerScanAddress,String gatewayPrefix) {
+    private static final String PREFIX="/";
+
+    public RouterHandlerFactory(String routerScanAddress,String gatewayPREFIX) {
         Objects.requireNonNull(routerScanAddress, "The router package address scan is empty.");
         reflections = new Reflections(routerScanAddress);
-        this.GATEWAY_PREFIX=gatewayPrefix;
+        GATEWAY_PREFIX=gatewayPREFIX;
     }
     public RouterHandlerFactory(String routerScanAddress) {
         Objects.requireNonNull(routerScanAddress, "The router package address scan is empty.");
@@ -69,7 +71,8 @@ public class RouterHandlerFactory {
      */
     public Router createRouter() {
         Router router = SingleVertxRouter.getRouter();
-        setHeader(router);// 如果需要特色设置，可自行在具体的api中修改
+        // 如果需要特色设置，可自行在具体的api中修改
+        setHeader(router);
         Set<HttpMethod> method = new HashSet<HttpMethod>(){{
             add(HttpMethod.GET);
             add(HttpMethod.POST);
@@ -111,7 +114,8 @@ public class RouterHandlerFactory {
      */
     public Router createSocketRouter(String inbound,String outbound) {
         Router router = SingleVertxRouter.getRouter();
-        setHeader(router);// 如果需要特色设置，可自行在具体的api中修改
+        // 如果需要特色设置，可自行在具体的api中修改
+        setHeader(router);
         Set<HttpMethod> method = new HashSet<HttpMethod>(){{
             add(HttpMethod.GET);
             add(HttpMethod.POST);
@@ -138,7 +142,7 @@ public class RouterHandlerFactory {
             logger.error(e,"Manually Register Handler Fail，Error details："+e.getMessage());
         }
         // 加入socketJS
-        joinSocketJS();
+        joinSocketJS(inbound,outbound);
         return router;
     }
 
@@ -155,7 +159,7 @@ public class RouterHandlerFactory {
     public Router joinSocketJS(String inbound,String outbound) {
         Router router = SingleVertxRouter.getRouter();
         // ping 2s
-        SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
+        SockJSHandlerOptions options = new SockJSHandlerOptions().setInsertJSESSIONID(true).setSessionTimeout(2*1000*1000).setHeartbeatInterval(2000);
         SockJSHandler sockJSHandler = SockJSHandler.create(StandardVertxUtil.getLocalVertx(), options);
         // 允许通过的规则
         BridgeOptions bridgeOptions = new BridgeOptions();
@@ -173,18 +177,22 @@ public class RouterHandlerFactory {
                 logger.trace("Register [{}] event on the eventbus",event.getRawMessage().getString("address"));
             }else if (event.type() == BridgeEventType.RECEIVE) {
                 logger.trace("The Socket client to the server sends the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.SEND) {//3、发送消息
+            }else if (event.type() == BridgeEventType.SEND) {
+                //3、发送消息
                 logger.trace("The Socket server to the client sends the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.PUBLISH) {//4、发布消息
+            }else if (event.type() == BridgeEventType.PUBLISH) {
+                //4、发布消息
                 logger.trace("The Socket server to the client publish the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.UNREGISTER) {//5、注销事件
-                logger.trace("The socket channel to unregister.");
-            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {//6、关闭
+            }else if (event.type() == BridgeEventType.UNREGISTER) {
+                //5、注销事件
+                logger.trace("The [{}] socket channel to unregister.",event.getRawMessage().getString("address"));
+            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {
+                //6、关闭
                 logger.trace("The socket channel to closed.");
             }
             event.complete(true);
         });
-        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
+        router.route(GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
         return router;
     }
     /**
@@ -198,7 +206,7 @@ public class RouterHandlerFactory {
     public Router joinSocketJS() {
         Router router = SingleVertxRouter.getRouter();
         // ping 2s
-        SockJSHandlerOptions options = new SockJSHandlerOptions().setHeartbeatInterval(2000);
+        SockJSHandlerOptions options = new SockJSHandlerOptions().setSessionTimeout(2*1000*1000).setHeartbeatInterval(2000);
         SockJSHandler sockJSHandler = SockJSHandler.create(StandardVertxUtil.getLocalVertx(), options);
         // 允许通过的规则
         BridgeOptions bridgeOptions = new BridgeOptions()
@@ -212,18 +220,22 @@ public class RouterHandlerFactory {
                 logger.trace("Register [{}] event on the eventbus",event.getRawMessage().getString("address"));
             }else if (event.type() == BridgeEventType.RECEIVE) {
                 logger.trace("The Socket client to the server sends the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.SEND) {//3、发送消息
+            }else if (event.type() == BridgeEventType.SEND) {
+                //3、发送消息
                 logger.trace("The Socket server to the client sends the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.PUBLISH) {//4、发布消息
+            }else if (event.type() == BridgeEventType.PUBLISH) {
+                //4、发布消息
                 logger.trace("The Socket server to the client publish the request,the message is {}",event.getRawMessage().encode());
-            }else if (event.type() == BridgeEventType.UNREGISTER) {//5、注销事件
+            }else if (event.type() == BridgeEventType.UNREGISTER) {
+                //5、注销事件
                 logger.trace("The socket channel to unregister.");
-            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {//6、关闭
+            }else if (event.type() == BridgeEventType.SOCKET_CLOSED) {
+                //6、关闭
                 logger.trace("The socket channel to closed.");
             }
             event.complete(true);
         });
-        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
+        router.route(GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
         return router;
     }
 
@@ -260,11 +272,11 @@ public class RouterHandlerFactory {
      */
     private void registerNewHandler(Router router,Class<?> handler) throws Exception {
         String root = GATEWAY_PREFIX;
-        if(!root.startsWith("/")){
-            root="/"+root;
+        if(!root.startsWith(PREFIX)){
+            root=PREFIX+root;
         }
-        if(!root.endsWith("/")){
-            root=root+"/";
+        if(!root.endsWith(PREFIX)){
+            root=root+PREFIX;
         }
         if (handler.isAnnotationPresent(RouteHandler.class)) {
             RouteHandler routeHandler = handler.getAnnotation(RouteHandler.class);
@@ -300,9 +312,11 @@ public class RouterHandlerFactory {
                         router.delete(url).handler(methodHandler);
                         break;
                     case ROUTE:
-                        router.route(url).handler(methodHandler);// get、post、delete、put
+                        // get、post、delete、put
+                        router.route(url).handler(methodHandler);
                         break;
-                    case GET: // fall through
+                    case GET:
+                        // fall through
                     default:
                         router.get(url).handler(methodHandler);
                         break;

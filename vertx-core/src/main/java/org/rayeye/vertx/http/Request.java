@@ -5,16 +5,16 @@ import io.vertx.core.json.JsonObject;
 
 /**
  * 用户请求对象封装
- * @ProjectName:
- * @Package:        org.rayeye.vertx.http
- * @ClassName:      Request
- * @Description:    用户请求对象封装
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/21 13:23
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/21 13:23
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        org.rayeye.vertx.http
+ * @className:      Request
+ * @description:    用户请求对象封装
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/21 13:23
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/21 13:23
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */
@@ -24,9 +24,9 @@ public class Request {
     String uri;
     String path;
     String host;
-    //RouteMethod method;
     String method;
-    String sendMethod;//接收方法
+    /** 接收方法 **/
+    String sendMethod;
 
     JsonObject params;
 

@@ -12,16 +12,16 @@ import java.util.Objects;
 
 /**
  * 标准的Vertx 对象
- * @ProjectName:    vertx-core
- * @Package:        org.rayeye.vertx.standard
- * @ClassName:      StandardVertxUtil
- * @Description:    标准的Vertx 对象，包含集群模式或者单例模式
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 18:20
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 18:20
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:    vertx-core
+ * @package:        org.rayeye.vertx.standard
+ * @className:      StandardVertxUtil
+ * @description:    标准的Vertx 对象，包含集群模式或者单例模式
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 18:20
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 18:20
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017</p>
  *
  */

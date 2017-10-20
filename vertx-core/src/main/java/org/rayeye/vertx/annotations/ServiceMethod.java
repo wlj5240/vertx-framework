@@ -5,16 +5,16 @@ import java.lang.annotation.*;
 
 /**
  * 用于标识handler注解
- * @ProjectName:
- * @Package:        org.rayeye.vertx.annotations
- * @ClassName:      ServiceMethod
- * @Description:    用于标识handler注解
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/21 13:22
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/21 13:22
- * @UpdateRemark:   The modified content
- * @Version:        1.0
+ * @projectName:
+ * @package:        org.rayeye.vertx.annotations
+ * @className:      ServiceMethod
+ * @description:    用于标识handler注解
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/21 13:22
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/21 13:22
+ * @updateRemark:   The modified content
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/21</p>
  *
  */

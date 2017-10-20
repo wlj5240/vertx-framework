@@ -4,22 +4,24 @@ import io.vertx.core.json.Json;
 
 /**
  *  响应消息类型
- * @ProjectName:    vertx-core
- * @Package:        org.rayeye.vertx.result
- * @ClassName:      ResultOb
- * @Description:    响应消息类型
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 13:34
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 13:34
- * @UpdateRemark:   相应消息
- * @Version:        1.0
+ * @projectName:    vertx-core
+ * @package:        org.rayeye.vertx.result
+ * @className:      ResultOb
+ * @description:    响应消息类型
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 13:34
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 13:34
+ * @updateRemark:   相应消息
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */
 public class ResultOb<T> {
-    private int code=200 ;//状态
-    private String msg="SUCCESS";//消息
+    /** 状态 **/
+    private int code=200 ;
+    /** 消息 **/
+    private String msg="SUCCESS";
     private T data;
 
     public T getData() {

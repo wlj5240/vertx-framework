@@ -4,16 +4,16 @@ import java.lang.annotation.*;
 
 /**
  * Verticle 映射，用于发布每个处理器所对应的真实处理服务类
- * @ProjectName:    vertx-core
- * @Package:        org.rayeye.vertx.annotations
- * @ClassName:      AuthInterceptor
- * @Description:    Verticle 映射，用于发布每个处理器所对应的真实处理服务类
- * @Author:         Neil.Zhou
- * @CreateDate:     2017/9/20 13:34
- * @UpdateUser:     Neil.Zhou
- * @UpdateDate:     2017/9/20 13:34
- * @UpdateRemark:   need to permission to verify
- * @Version:        1.0
+ * @projectName:    vertx-core
+ * @package:        org.rayeye.vertx.annotations
+ * @className:      AuthInterceptor
+ * @description:    Verticle 映射，用于发布每个处理器所对应的真实处理服务类
+ * @author:         Neil.Zhou
+ * @createDate:     2017/9/20 13:34
+ * @updateUser:     Neil.Zhou
+ * @updateDate:     2017/9/20 13:34
+ * @updateRemark:   need to permission to verify
+ * @version:        1.0
  * <p>Copyright: Copyright (c) 2017/9/20</p>
  *
  */
