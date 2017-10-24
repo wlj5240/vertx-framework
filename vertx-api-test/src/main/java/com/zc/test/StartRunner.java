@@ -42,9 +42,9 @@ public class StartRunner{
         // 添加自定义Router处理
        //DeployVertxServer.startDeploy(new RouterHandler("com.zc.test.controller","/api").specificRouter(),"com.zc.test.service","/api",8989);
 
-        StandardVertxUtil.getStandardVertx().setPeriodic(6*1000*1000,memoryLog->{
+        StandardVertxUtil.getStandardVertx().setPeriodic(6*1000,memoryLog->{
             //test.receive.client
-            StandardVertxUtil.getStandardVertx().eventBus().send("test.receive.client",new JsonObject().put("name","测试").put("age","hhahah"));
+            StandardVertxUtil.getStandardVertx().eventBus().publish("test.receive.client",new JsonObject().put("name","测试").put("age","hhahah"));
         });
 
     }

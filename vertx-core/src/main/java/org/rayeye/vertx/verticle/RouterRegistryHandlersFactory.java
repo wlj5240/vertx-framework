@@ -47,7 +47,7 @@ public class RouterRegistryHandlersFactory extends AbstractVerticle {
     protected Router router;
     HttpServer server;
     /** 默认http server端口 **/
-    public static volatile int port=8080;
+    public volatile int port=8080;
 
     /** Constructs a new RouterRegistryHandlersFactory. */
     public RouterRegistryHandlersFactory(int port) {
@@ -63,7 +63,7 @@ public class RouterRegistryHandlersFactory extends AbstractVerticle {
     public RouterRegistryHandlersFactory(Router router,int port) {
         this.router=router;
         if(port>0){
-            port=port;
+           this.port=port;
         }
     }
 
