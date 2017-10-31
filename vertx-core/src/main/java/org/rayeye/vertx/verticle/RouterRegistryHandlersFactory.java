@@ -2,30 +2,13 @@ package org.rayeye.vertx.verticle;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.Handler;
-import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.handler.BodyHandler;
-import io.vertx.ext.web.handler.CookieHandler;
-import io.vertx.ext.web.handler.CorsHandler;
 import org.rayeye.common.log.Log;
 import org.rayeye.common.log.LogFactory;
-import org.rayeye.vertx.annotations.RouteHandler;
-import org.rayeye.vertx.annotations.RouteMapping;
-import org.rayeye.vertx.annotations.RouteMethod;
 import org.rayeye.vertx.standard.SingleVertxRouter;
-import org.reflections.Reflections;
-
-import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import static io.vertx.core.http.HttpHeaders.*;
-import static io.vertx.core.http.HttpHeaders.ACCESS_CONTROL_MAX_AGE;
 
 /**
  * router 扫描注册器
@@ -53,7 +36,7 @@ public class RouterRegistryHandlersFactory extends AbstractVerticle {
     public RouterRegistryHandlersFactory(int port) {
         this.router= SingleVertxRouter.getRouter();
         if(port>0){
-            port=port;
+            this.port=port;
         }
     }
     public RouterRegistryHandlersFactory(Router router) {
@@ -78,9 +61,9 @@ public class RouterRegistryHandlersFactory extends AbstractVerticle {
      */
     @Override
     public void start(Future<Void> future) throws Exception {
-        logger.trace("To start listening to port {} ......",port);
+        logger.trace("To start listening to port {} ......",this.port);
         super.start();
-        HttpServerOptions options = new HttpServerOptions().setMaxWebsocketFrameSize(1000000).setPort(port);
+        HttpServerOptions options = new HttpServerOptions().setMaxWebsocketFrameSize(1000000).setPort(this.port);
         server = vertx.createHttpServer(options);
         server.requestHandler(router::accept);
         server.listen(result -> {

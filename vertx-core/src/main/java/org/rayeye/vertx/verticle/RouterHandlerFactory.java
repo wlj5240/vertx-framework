@@ -45,20 +45,20 @@ public class RouterHandlerFactory {
     private static Log logger = LogFactory.get(RouterHandlerFactory.class);
 
     /** 需要扫描注册的Router路径 **/
-    private static volatile Reflections reflections = new Reflections("com.rayeye");
+    private volatile Reflections reflections = new Reflections("com.rayeye");
     /** 默认api前缀 **/
-    public static volatile String GATEWAY_PREFIX="/";
+    public volatile String GATEWAY_PREFIX="/";
 
-    private static final String PREFIX="/";
+    private final String PREFIX="/";
 
     public RouterHandlerFactory(String routerScanAddress,String gatewayPREFIX) {
         Objects.requireNonNull(routerScanAddress, "The router package address scan is empty.");
-        reflections = new Reflections(routerScanAddress);
-        GATEWAY_PREFIX=gatewayPREFIX;
+        this.reflections = new Reflections(routerScanAddress);
+        this.GATEWAY_PREFIX=gatewayPREFIX;
     }
     public RouterHandlerFactory(String routerScanAddress) {
         Objects.requireNonNull(routerScanAddress, "The router package address scan is empty.");
-        reflections = new Reflections(routerScanAddress);
+        this.reflections = new Reflections(routerScanAddress);
     }
     /**
      * 开始扫描并注册handler
@@ -192,7 +192,7 @@ public class RouterHandlerFactory {
             }
             event.complete(true);
         });
-        router.route(GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
+        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
         return router;
     }
     /**
@@ -235,7 +235,7 @@ public class RouterHandlerFactory {
             }
             event.complete(true);
         });
-        router.route(GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
+        router.route(this.GATEWAY_PREFIX+"/ws-bus/*").handler(sockJSHandler);
         return router;
     }
 
@@ -271,12 +271,12 @@ public class RouterHandlerFactory {
      * @date        2017/9/25 13:26
      */
     private void registerNewHandler(Router router,Class<?> handler) throws Exception {
-        String root = GATEWAY_PREFIX;
-        if(!root.startsWith(PREFIX)){
-            root=PREFIX+root;
+        String root = this.GATEWAY_PREFIX;
+        if(!root.startsWith(this.PREFIX)){
+            root=this.PREFIX+root;
         }
-        if(!root.endsWith(PREFIX)){
-            root=root+PREFIX;
+        if(!root.endsWith(this.PREFIX)){
+            root=root+this.PREFIX;
         }
         if (handler.isAnnotationPresent(RouteHandler.class)) {
             RouteHandler routeHandler = handler.getAnnotation(RouteHandler.class);

@@ -13,7 +13,7 @@
     <artifactId>vertx-core</artifactId>
     <name>vertx 核心包</name>
     <packaging>jar</packaging>
-    <version>1.15</version>
+    <version>1.15.1</version>
 
     <description>
         1、模块名称：vertx-core
@@ -167,6 +167,19 @@
 
 
     </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>packaging-releases</id>
+            <name>Packaging Release Repository</name>
+            <url>http://192.168.10.9:8089/nexus/content/repositories/thirdparty/</url>
+        </repository>
+        <snapshotRepository>
+            <id>packaging-snapshots</id>
+            <name>Packaging Snapshot Repository</name>
+            <url>http://192.168.10.9:8089/nexus/content/repositories/thirdparty/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
