@@ -40,7 +40,7 @@ public class AuthController extends SenderInvokeHandler{
             JsonObject param = ParamUtil.getRequestParams(ctx);
             logger.debug("参数:"+param.encode());
             ctx.response().setStatusCode(200);
-            ctx.response().end(ResultOb.build().setMsg("Hello，Welcome to use Vertx.....").toString());
+            ctx.response().end(ResultOb.build().setMsg("你好，欢迎使用Vertx").toString());
         };
     }
 

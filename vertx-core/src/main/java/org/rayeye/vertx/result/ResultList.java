@@ -1,7 +1,10 @@
 package org.rayeye.vertx.result;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.github.miemiedev.mybatis.paginator.domain.Paginator;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
 
 /**
  *  response响应集合消息
@@ -96,6 +99,7 @@ public class ResultList<T> extends ResultOb{
     }
     @Override
     public String toString(){
-        return Json.encode(this);
+        //return Json.encode(this);
+        return JSON.toJSONString(this, SerializerFeature.BrowserCompatible);
     }
 }

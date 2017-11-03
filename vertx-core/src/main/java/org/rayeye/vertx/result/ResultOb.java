@@ -1,6 +1,9 @@
 package org.rayeye.vertx.result;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
 
 /**
  *  响应消息类型
@@ -52,7 +55,8 @@ public class ResultOb<T> {
     }
     @Override
     public String toString(){
-        return Json.encode(this);
+       // return Json.encode(this);
+        return JSON.toJSONString(this, SerializerFeature.BrowserCompatible);
     }
 
     public static ResultOb build(){
